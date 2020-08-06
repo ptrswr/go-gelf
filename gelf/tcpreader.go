@@ -19,7 +19,7 @@ type connChannels struct {
 	confirm chan string
 }
 
-func newTCPReader(addr string) (*TCPReader, chan string, chan string, error) {
+func NewTCPReader(addr string) (*TCPReader, chan string, chan string, error) {
 	var err error
 	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
@@ -140,7 +140,7 @@ func handleConnection(conn net.Conn, messages chan<- []byte, dropSignal chan str
 	}
 }
 
-func (r *TCPReader) readMessage() (*Message, error) {
+func (r *TCPReader) ReadMessage() (*Message, error) {
 	b := <-r.messages
 
 	var msg Message
